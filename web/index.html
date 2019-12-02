@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WASM</title>
+  <style>
+    body {
+      background-color: hsl(0, 0%, 14%);
+    }
+  </style>
+  <script>
+    WebAssembly.instantiateStreaming(fetch('ellie.wasm')).then(({
+      instance: {
+        exports
+      }
+    }) => {
+      console.log(exports.check(10))
+      document.addEventListener('keyup', evt => {
+        const code = evt.key.toLocaleLowerCase().codePointAt(0)
+        console.log(code)
+      })
+    })
+  </script>
+</head>
+
+<body></body>
+
+</html>

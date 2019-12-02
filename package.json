@@ -4,23 +4,19 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "assemblyscript": "^0.8.1"
+    "assemblyscript": "^0.8.1",
+    "http-server": "^0.12.0",
+    "nodemon": "^2.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "asbuild:untouched": "asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --sourceMap --validate --debug",
     "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --validate --optimize",
-    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kellengreen/easteregg-wasm.git"
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
+    "build": "wat2wasm web/ellie.wat -o web/ellie.wasm",
+    "server": "npx http-server -c-1 web/",
+    "watch": "npx nodemon --watch 'web/ellie.wat' --exec 'npm run build'"
   },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kellengreen/easteregg-wasm/issues"
-  },
-  "homepage": "https://github.com/kellengreen/easteregg-wasm#readme"
+  "license": "ISC"
 }

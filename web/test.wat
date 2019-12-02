@@ -6,7 +6,8 @@
   	(global $l i32 (i32.const 108))
   	(global $i i32 (i32.const 105))
     (global (i32.const 0) "")
-  	  	
+
+  	(data (i32.const 0) "")
   	(data (i32.const 0) "transition:transform 2s;transform:rotate(1080deg)\00")
   
   	(func $keyup (export "keyup") (param $key i32) (result i32)
