@@ -14,18 +14,29 @@
   <script>
     WebAssembly.instantiateStreaming(fetch('ellie.wasm')).then(({
       instance: {
-        exports
+        exports: {
+          check,
+          memory: {
+            buffer,
+          }
+        }
       }
     }) => {
-      console.log(exports.check(10))
+      let style = ''
+      for (const [key, val] of new Uint8Array(buffer).entries()) {
+        if (val === 0) {
+          style = new TextDecoder('UTF-8').decode(buffer.slice(0, key))   
+          break
+        }
+      }
       document.addEventListener('keyup', evt => {
         const code = evt.key.toLocaleLowerCase().codePointAt(0)
-        console.log(code)
+        if (check(code)) {
+          document.documentElement.style=style
+        }
       })
     })
   </script>
 </head>
-
 <body></body>
-
 </html>
